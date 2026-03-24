@@ -1,0 +1,56 @@
+{
+  "name": "openclaw-qryma-search",
+  "version": "1.0.0",
+  "title": "Qryma Search",
+  "description": "Qryma search engine skill with multiple output formats",
+  "requires_api_key": true,
+  "api_key_env": "QRYMA_API_KEY",
+  "endpoint_env": "QRYMA_ENDPOINT",
+  "entry_point": "main_claw.py",
+  "language": "python",
+  "parameters": [
+    {
+      "name": "query",
+      "type": "string",
+      "required": true,
+      "description": "Search keywords"
+    },
+    {
+      "name": "max_results",
+      "type": "integer",
+      "required": false,
+      "default": 5,
+      "description": "Maximum number of results"
+    },
+    {
+      "name": "format",
+      "type": "string",
+      "required": false,
+      "default": "md",
+      "description": "Output format: raw | brave | md",
+      "choices": [
+        "raw",
+        "brave",
+        "md"
+      ]
+    },
+    {
+      "name": "include_answer",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether to include AI answer"
+    },
+    {
+      "name": "search_depth",
+      "type": "string",
+      "required": false,
+      "default": "basic",
+      "description": "Search depth: basic | advanced",
+      "choices": [
+        "basic",
+        "advanced"
+      ]
+    }
+  ]
+}

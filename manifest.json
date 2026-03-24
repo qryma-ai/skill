@@ -1,0 +1,117 @@
+{
+  "name": "qryma-search",
+  "version": "1.0.0",
+  "displayName": "Qryma Search",
+  "description": "Web search with multiple output formats, AI answers, and language support using the Qryma API",
+  "author": "Qryma Team",
+  "homepage": "",
+  "license": "MIT",
+  "keywords": [
+    "search",
+    "web-search",
+    "ai",
+    "qryma",
+    "openclaw",
+    "skills",
+    "agent"
+  ],
+  "category": "search",
+  "platforms": [
+    "openclaw",
+    "skills.sh",
+    "clawhub",
+    "skillstore",
+    "skillsmp",
+    "skill-cn",
+    "skillhub.tencent"
+  ],
+  "entryPoint": {
+    "openclaw": "main_claw.py",
+    "default": "main_claw.py"
+  },
+  "commands": [
+    {
+      "name": "search",
+      "description": "Search the web with Qryma",
+      "usage": "python main_claw.py --query \"your query\"",
+      "parameters": [
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "description": "Search query"
+        },
+        {
+          "name": "max-results",
+          "type": "number",
+          "default": 5,
+          "description": "Maximum number of results"
+        },
+        {
+          "name": "include-answer",
+          "type": "boolean",
+          "default": false,
+          "description": "Include AI answer"
+        },
+        {
+          "name": "search-depth",
+          "type": "enum",
+          "options": ["basic", "advanced"],
+          "default": "basic",
+          "description": "Search depth level"
+        },
+        {
+          "name": "format",
+          "type": "enum",
+          "options": ["raw", "brave", "md"],
+          "default": "md",
+          "description": "Output format"
+        }
+      ]
+    }
+  ],
+  "requirements": {
+    "python": ">=3.8",
+    "dependencies": [
+      {
+        "name": "requests",
+        "version": ">=2.28.0"
+      }
+    ]
+  },
+  "config": {
+    "apiKey": {
+      "name": "QRYMA_API_KEY",
+      "description": "Qryma API key",
+      "required": true
+    },
+    "endpoint": {
+      "name": "QRYMA_ENDPOINT",
+      "description": "Qryma API endpoint",
+      "required": false,
+      "default": "https://search.qryma.com/api/web"
+    }
+  },
+  "examples": [
+    {
+      "name": "Basic search",
+      "description": "Search for information",
+      "command": "python main_claw.py --query \"how to learn python\" --format md"
+    },
+    {
+      "name": "Search with AI answer",
+      "description": "Get direct answers",
+      "command": "python main_claw.py --query \"explain quantum computing\" --include-answer --format md"
+    }
+  ],
+  "badges": [
+    {
+      "name": "OpenClaw",
+      "color": "#0070f3"
+    },
+    {
+      "name": "Python 3.8+",
+      "color": "#3776ab"
+    }
+  ]
+}
