@@ -1,7 +1,7 @@
 {
   "name": "qryma-search",
   "version": "1.0.0",
-  "description": "Web search with multiple output formats, AI answers, and language support using the Qryma API",
+  "description": "Qryma Ai web search API with Markdown/JSON/Brave formats. Generous free tier covers most daily needs.",
   "main": "main_claw.py",
   "scripts": {
     "search": "python main_claw.py",

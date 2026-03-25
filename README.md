@@ -1,6 +1,6 @@
 # Qryma Agent Skills
 
-Web search with multiple output formats — powered by the Qryma API.
+Qryma Ai web search API with Markdown/JSON/Brave formats. Generous free tier covers most daily needs.
 
 ## Installation
 
