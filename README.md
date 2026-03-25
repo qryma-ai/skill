@@ -55,7 +55,3 @@ Start simple, escalate when needed:
 1. **Basic Search** — `python main_claw.py --query "how to learn python" --format md`
 2. **JSON Output** — `python main_claw.py --query "latest AI trends" --format raw`
 3. **Multiple Results** — `python main_claw.py --query "ai ethics" --max-results 10`
-
-## License
-
-MIT
