@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-OpenClaw Platform Adapter
+Qryma Platform Adapter
 """
 import argparse
 import json
@@ -23,9 +23,9 @@ except (ImportError, ValueError):
 
 def main():
     """Main entry point for the skill"""
-    adapter = OpenClawAdapter()
-    parser = OpenClawAdapter.create_parser()
+    parser = QrymaAdapter.create_parser()
     args = parser.parse_args()
+    adapter = QrymaAdapter(api_key=getattr(args, "api_key", None))
     adapter.run(args)
 
 
@@ -67,11 +67,14 @@ def to_markdown(obj: dict) -> str:
     return "\n".join(lines).strip() + "\n"
 
 
-class OpenClawAdapter:
-    """OpenClaw adapter"""
+class QrymaAdapter:
+    """Qryma adapter"""
 
-    def __init__(self, core: QrymaSearchCore = None):
-        self.core = core or QrymaSearchCore()
+    def __init__(self, core: QrymaSearchCore = None, api_key: str = None):
+        if core:
+            self.core = core
+        else:
+            self.core = QrymaSearchCore(api_key=api_key)
 
     def run(self, args: argparse.Namespace) -> None:
         """Execute search"""
@@ -79,8 +82,10 @@ class OpenClawAdapter:
             result = self.core.search(
                 query=args.query,
                 max_results=args.max_results,
-                include_answer=args.include_answer,
-                search_depth=args.search_depth,
+                lang=getattr(args, "lang", "en"),
+                start=getattr(args, "start", 0),
+                safe=getattr(args, "safe", False),
+                detail=getattr(args, "detail", False),
             )
 
             if args.format == "md":
@@ -101,8 +106,9 @@ class OpenClawAdapter:
     def create_parser() -> argparse.ArgumentParser:
         """Create command line parser"""
         parser = argparse.ArgumentParser(
-            description="Qryma search tool for OpenClaw "
+            description="Qryma search tool"
         )
+        parser.add_argument("--api-key", help="Qryma API key")
         parser.add_argument("--query", required=True, help="Search query")
         parser.add_argument(
             "--max-results",
@@ -111,15 +117,25 @@ class OpenClawAdapter:
             help="Maximum number of results",
         )
         parser.add_argument(
-            "--include-answer",
-            action="store_true",
-            help="Include AI answer",
+            "--lang",
+            default="en",
+            help="Language code (default: en)",
         )
         parser.add_argument(
-            "--search-depth",
-            default="basic",
-            choices=["basic", "advanced"],
-            help="Search depth",
+            "--start",
+            type=int,
+            default=0,
+            help="Start offset (default: 0)",
+        )
+        parser.add_argument(
+            "--safe",
+            action="store_true",
+            help="Enable safe search (default: False)",
+        )
+        parser.add_argument(
+            "--detail",
+            action="store_true",
+            help="Enable detailed results (default: False)",
         )
         parser.add_argument(
             "--format",

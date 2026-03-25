@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-OpenClaw Direct Run Version
+Qryma Direct Run Version
 Simplified version that directly accepts command line arguments and outputs results
 """
 import argparse
@@ -15,30 +15,31 @@ if src_dir not in sys.path:
     sys.path.insert(0, src_dir)
 
 try:
-    from adapters.openclaw_adapter import OpenClawAdapter
+    from adapters.adapter import QrymaAdapter
 except ImportError:
     # Fallback import method
     print("Warning: Using fallback import method", file=sys.stderr)
     import importlib.util
     spec = importlib.util.spec_from_file_location(
-        "openclaw_adapter",
-        os.path.join(src_dir, 'adapters', 'openclaw_adapter.py')
+        "adapter",
+        os.path.join(src_dir, 'adapters', 'adapter.py')
     )
-    openclaw_adapter = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(openclaw_adapter)
-    OpenClawAdapter = openclaw_adapter.OpenClawAdapter
+    adapter_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(adapter_module)
+    QrymaAdapter = adapter_module.QrymaAdapter
 
 
 def main():
-    adapter = OpenClawAdapter()
-    parser = OpenClawAdapter.create_parser()
+    parser = QrymaAdapter.create_parser()
     args = parser.parse_args()
+    adapter = QrymaAdapter(api_key=getattr(args, "api_key", None))
     adapter.run(args)
 
 
 def handler(event, context=None):
     """Handler function for platform integration"""
-    adapter = OpenClawAdapter()
+    api_key = event.get("api_key") if isinstance(event, dict) else None
+    adapter = QrymaAdapter(api_key=api_key)
     return adapter.run(event)
 
 

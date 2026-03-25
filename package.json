@@ -12,7 +12,6 @@
     "web-search",
     "ai",
     "qryma",
-    "openclaw",
     "skills",
     "agent"
   ],
@@ -20,7 +19,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/openclaw-qryma-search.git"
+    "url": "https://github.com/qryma-ai/skill.git"
   },
   "homepage": "",
   "bugs": {
@@ -34,7 +33,6 @@
   "private": false,
   "skill": {
     "platforms": [
-      "openclaw",
       "skills.sh",
       "clawhub",
       "skillstore",

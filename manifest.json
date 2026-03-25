@@ -11,13 +11,11 @@
     "web-search",
     "ai",
     "qryma",
-    "openclaw",
     "skills",
     "agent"
   ],
   "category": "search",
   "platforms": [
-    "openclaw",
     "skills.sh",
     "clawhub",
     "skillstore",
@@ -26,7 +24,6 @@
     "skillhub.tencent"
   ],
   "entryPoint": {
-    "openclaw": "main_claw.py",
     "default": "main_claw.py"
   },
   "commands": [
@@ -105,10 +102,6 @@
     }
   ],
   "badges": [
-    {
-      "name": "OpenClaw",
-      "color": "#0070f3"
-    },
     {
       "name": "Python 3.8+",
       "color": "#3776ab"

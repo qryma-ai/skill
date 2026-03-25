@@ -26,7 +26,9 @@ def load_key() -> Optional[str]:
         pass  # just for loading, we'll handle it in the core
 
     # Load from config file
-    env_path = os.path.expanduser("~/.openclaw/.env")
+    env_path = os.path.expanduser("~/.qryma/.env")
+    if not os.path.exists(env_path):
+        env_path = ".env"
     if os.path.exists(env_path):
         try:
             with open(env_path, "r", encoding="utf-8", errors="ignore") as f:
@@ -50,7 +52,9 @@ def load_endpoint() -> str:
         return endpoint.strip()
 
     # Load from config file
-    env_path = os.path.expanduser("~/.openclaw/.env")
+    env_path = os.path.expanduser("~/.qryma/.env")
+    if not os.path.exists(env_path):
+        env_path = ".env"
     if os.path.exists(env_path):
         try:
             with open(env_path, "r", encoding="utf-8", errors="ignore") as f:
@@ -78,22 +82,22 @@ class QrymaSearchCore:
         self,
         query: str,
         max_results: int = 5,
-        include_answer: bool = False,
-        search_depth: str = "basic",
+        lang: str = "en",
+        start: int = 0,
+        safe: bool = False,
+        detail: bool = False,
     ) -> dict:
         """Execute search"""
         if not self.api_key:
             raise ValueError("QRYMA_API_KEY not found")
 
         # Backend API parameters: query, lang, start, safe, detail
-        # Note: max_results, include_answer, search_depth are NOT sent to API
-        #       they are processed locally after receiving results
         payload = {
             "query": query,
-            "lang": "en",
-            "start": 0,
-            "safe": False,
-            "detail": False,
+            "lang": lang,
+            "start": start,
+            "safe": safe,
+            "detail": detail,
         }
 
         data = json.dumps(payload).encode("utf-8")
@@ -117,17 +121,14 @@ class QrymaSearchCore:
         except json.JSONDecodeError as e:
             raise ValueError(f"Response parsing failed: {e}") from e
 
-        # Format response to match Python SDK expected format
+        # Format response
         out = {
             "query": query,
-            "answer": obj.get("answer"),
             "results": [],
         }
 
         # Process result format returned by backend
-        # Note: max_results is applied locally by truncating results array
-        # Note: include_answer determines if answer field should be included
-        # Note: search_depth is currently not supported
+        # max_results is applied locally by truncating results array
         for r in (obj.get("organic") or [])[:max_results]:
             out["results"].append(
                 {
@@ -136,8 +137,5 @@ class QrymaSearchCore:
                     "content": r.get("snippet"),  # API returns snippet field
                 }
             )
-
-        if not include_answer:
-            out.pop("answer", None)
 
         return out
