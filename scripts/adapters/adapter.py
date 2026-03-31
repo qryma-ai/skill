@@ -84,7 +84,7 @@ class QrymaAdapter:
                 lang=getattr(args, "lang", None),
                 start=getattr(args, "start", 0),
                 safe=getattr(args, "safe", False),
-                detail=getattr(args, "detail", True),
+                mode=getattr(args, "mode", True),
             )
 
             if args.format == "md":
@@ -116,7 +116,7 @@ class QrymaAdapter:
         parser.add_argument(
             "--max-results",
             type=int,
-            default=10,
+            default=5,
             help="Maximum number of results",
         )
         parser.add_argument(
@@ -136,7 +136,7 @@ class QrymaAdapter:
             help="Enable safe search (default: False)",
         )
         parser.add_argument(
-            "--detail",
+            "--mode",
             action="store_false",
             help="Enable detailed results (default: True)",
         )

@@ -57,11 +57,11 @@ Get an API key from your Qryma service provider.
 |--------|-------------|
 | `--api-key` | Qryma API key |
 | `--query` | **Required** Search query (e.g. "machine learning") |
-| `--max-results` | Maximum number of results (default: 10) |
+| `--max-results` | Maximum number of results (default: 5) |
 | `--lang` | Language code (default: en) - [See available languages](https://developers.google.com/custom-search/docs/xml_results_appendices#interfaceLanguages) |
 | `--start` | Start offset (default: 0) |
 | `--safe` | Enable safe search (default: False) |
-| `--detail` | Enable detailed results (default: True) |
+| `--mode` | Enable detailed results (default: True) |
 | `--format` | Output format: raw \| brave \| md (default: raw) |
 
 ## Workflow
@@ -70,4 +70,4 @@ Start simple, escalate when needed:
 
 1. **Basic Search** — `python main_claw.py --query "how to learn python" --format md`
 2. **JSON Output** — `python main_claw.py --query "latest AI trends" --format raw`
-3. **Multiple Results** — `python main_claw.py --query "ai ethics" --max-results 10`
+3. **Multiple Results** — `python main_claw.py --query "ai ethics" --max-results 5`
