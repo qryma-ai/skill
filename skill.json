@@ -45,10 +45,11 @@
     },
     {
       "name": "mode",
-      "type": "boolean",
+      "type": "string",
       "required": false,
-      "default": true,
-      "description": "Enable detailed results"
+      "default": "fulltext",
+      "choices": ["fulltext", "snippet"],
+      "description": "Search mode: fulltext (detailed) | snippet (concise) (default: fulltext)"
     },
     {
       "name": "format",

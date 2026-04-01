@@ -85,7 +85,7 @@ class QrymaSearchCore:
         lang: Optional[str] = None,
         start: int = 0,
         safe: bool = False,
-        mode: bool = True,
+        mode: str = "fulltext",
     ) -> dict:
         """Execute search"""
         if not self.api_key:
@@ -94,6 +94,10 @@ class QrymaSearchCore:
         # 如果没有指定语言，则自动检测
         if lang is None:
             lang = ""
+
+        # 处理向后兼容性：如果传入布尔值，转换为对应的字符串
+        if isinstance(mode, bool):
+            mode = "fulltext" if mode else "snippet"
 
         # Backend API parameters: query, lang, start, safe, mode, max_results
         payload = {

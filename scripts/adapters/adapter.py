@@ -84,7 +84,7 @@ class QrymaAdapter:
                 lang=getattr(args, "lang", None),
                 start=getattr(args, "start", 0),
                 safe=getattr(args, "safe", False),
-                mode=getattr(args, "mode", True),
+                mode=getattr(args, "mode", "fulltext"),
             )
 
             if args.format == "md":
@@ -137,8 +137,9 @@ class QrymaAdapter:
         )
         parser.add_argument(
             "--mode",
-            action="store_false",
-            help="Enable detailed results (default: True)",
+            default="fulltext",
+            choices=["fulltext", "snippet"],
+            help="Search mode: fulltext (detailed) | snippet (concise) (default: fulltext)",
         )
         parser.add_argument(
             "--format",

@@ -70,9 +70,10 @@
         },
         {
           "name": "mode",
-          "type": "boolean",
-          "default": true,
-          "description": "Enable detailed results"
+          "type": "string",
+          "default": "fulltext",
+          "choices": ["fulltext", "snippet"],
+          "description": "Search mode: fulltext (detailed) | snippet (concise) (default: fulltext)"
         },
         {
           "name": "format",

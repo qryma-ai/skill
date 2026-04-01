@@ -61,7 +61,7 @@ Get an API key from your Qryma service provider.
 | `--lang` | Language code (default: en) - [See available languages](https://developers.google.com/custom-search/docs/xml_results_appendices#interfaceLanguages) |
 | `--start` | Start offset (default: 0) |
 | `--safe` | Enable safe search (default: False) |
-| `--mode` | Enable detailed results (default: True) |
+| `--mode` | Search mode: fulltext (detailed) | snippet (concise) (default: fulltext) |
 | `--format` | Output format: raw \| brave \| md (default: raw) |
 
 ## Workflow
