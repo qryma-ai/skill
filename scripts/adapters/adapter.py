@@ -75,14 +75,13 @@ class QrymaAdapter:
             self.core = core
         else:
             self.core = QrymaSearchCore(api_key=api_key)
-    def run(self, args: argparse.Namespace) -> None:        
+    def run(self, args: argparse.Namespace) -> None:
         """Execute search"""
         try:
             result = self.core.search(
                 query=args.query,
                 max_results=args.max_results,
                 lang=getattr(args, "lang", None),
-                start=getattr(args, "start", 0),
                 safe=getattr(args, "safe", False),
                 mode=getattr(args, "mode", "fulltext"),
             )
@@ -123,12 +122,6 @@ class QrymaAdapter:
             "--lang",
             default=None,
             help="Language code (default: auto-detect)",
-        )
-        parser.add_argument(
-            "--start",
-            type=int,
-            default=0,
-            help="Start offset (default: 0)",
         )
         parser.add_argument(
             "--safe",

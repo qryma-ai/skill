@@ -83,7 +83,6 @@ class QrymaSearchCore:
         query: str,
         max_results: int = 5,
         lang: Optional[str] = None,
-        start: int = 0,
         safe: bool = False,
         mode: str = "fulltext",
     ) -> dict:
@@ -99,11 +98,10 @@ class QrymaSearchCore:
         if isinstance(mode, bool):
             mode = "fulltext" if mode else "snippet"
 
-        # Backend API parameters: query, lang, start, safe, mode, max_results
+        # Backend API parameters: query, lang, safe, mode, max_results
         payload = {
             "query": query,
             "lang": lang,
-            "start": start,
             "safe": safe,
             "mode": mode,
             "max_results": max_results,

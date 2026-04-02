@@ -57,12 +57,6 @@
           "description": "Language code - [See available languages](https://developers.google.com/custom-search/docs/xml_results_appendices#interfaceLanguages)"
         },
         {
-          "name": "start",
-          "type": "number",
-          "default": 0,
-          "description": "Start offset for pagination"
-        },
-        {
           "name": "safe",
           "type": "boolean",
           "default": false,

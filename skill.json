@@ -30,13 +30,6 @@
       "description": "Language code"
     },
     {
-      "name": "start",
-      "type": "integer",
-      "required": false,
-      "default": 0,
-      "description": "Start offset for pagination"
-    },
-    {
       "name": "safe",
       "type": "boolean",
       "required": false,

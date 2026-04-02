@@ -59,7 +59,6 @@ Get an API key from your Qryma service provider.
 | `--query` | **Required** Search query (e.g. "machine learning") |
 | `--max-results` | Maximum number of results (default: 5) |
 | `--lang` | Language code (default: en) - [See available languages](https://developers.google.com/custom-search/docs/xml_results_appendices#interfaceLanguages) |
-| `--start` | Start offset (default: 0) |
 | `--safe` | Enable safe search (default: False) |
 | `--mode` | Search mode: fulltext (detailed) | snippet (concise) (default: fulltext) |
 | `--format` | Output format: raw \| brave \| md (default: raw) |
